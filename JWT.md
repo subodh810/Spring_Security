@@ -1,0 +1,75 @@
+Q. JWT and Flow?
+>>JWT (JSON Web Token) is a compact, secure way to transmit user information between a client and a server. It is commonly used for authentication and authorization in modern applications.
+
+>>Structure of JWT :- A JWT consists of 3 parts separated by dots
+>1. Header<br>
+Contains token type and signing algorithm.
+>2. Payload<br>
+Contains user information (claims).
+>3. Signature<br>
+Used to verify that the token has not been tampered with.
+
+>Flow
+>1. User sends username and password to the server.
+>2. Spring Security authenticates the credentials.
+>3. Server generates a JWT token.
+>4. Token is returned to the client.
+>5. Client stores the token (usually in memory or secure storage).
+>6. For every request, the client sends: Authorization: Bearer <JWT_TOKEN>
+>7. Spring Security validates the token.
+>8. If valid, the request is processed; otherwise, access is denied.
+
+
+Q: Can JWT be modified by the client?
+>> The payload can be decoded and viewed, but if anyone modifies it, the signature becomes invalid and Spring Security rejects the token.
+
+
+Q. Why use OncePerRequestFilter in JWT Authentication?
+>>In Spring Security, JWT validation is typically implemented inside a custom filter that extends OncePerRequestFilter.
+>OncePerRequestFilter guarantees that the filter executes only once for a single HTTP request.<br>
+Without it, a filter might run multiple times during :-
+Request forwarding, 
+Internal dispatching, 
+Error dispatching &
+Async processing.<br>
+This can lead to repeated JWT validation and unnecessary overhead.
+
+
+Q. What is the difference between JWT and Session Authentication?
+>>Session Authentication is stateful, where the server creates and stores a session after login and the client sends a session ID with every request. JWT Authentication is stateless,<br> where the server generates a signed token containing user information and the client sends that token on every request.
+
+>Session-based authentication requires server-side storage, while JWT does not, making JWT more suitable for REST APIs, microservices, and Angular/React applications.
+
+
+Q. What is the difference between Access Token and Refresh Token?
+>>Access Token is a short-lived token used to access protected APIs,<br> while Refresh Token is a long-lived token used to obtain a new Access Token when the current one expires.
+
+> Access Tokens are sent with every request, whereas Refresh Tokens are only sent to the authentication server when a new Access Token is needed. This improves both security and user experience.
+
+>When a user logs in, the server generates an Access Token and a Refresh Token. The frontend sends the Access Token with every API request. When the Access Token expires, the server returns 401 Unauthorized. The Angular HTTP Interceptor catches this response and sends the Refresh Token to a dedicated refresh endpoint. After validating the Refresh Token, the backend generates a new Access Token and returns it to the frontend. The interceptor then retries the original API request with the new Access Token. If the Refresh Token is also expired, the user must log in again.
+
+
+Q. How do you validate a JWT token?
+>>"JWT validation involves multiple checks. First, Spring Security extracts the token from the Authorization header. Then it verifies the token's signature using the secret key to ensure it hasn't been tampered with. Next, it checks whether the token has expired. After that, it extracts the username from the token and loads the user details from the database. If all checks pass, Spring creates an Authentication object and stores it in SecurityContextHolder. The user is then considered authenticated and allowed to access protected resources."
+
+
+Q. How do you handle token expiration?
+>>"To handle token expiration, we use a short-lived Access Token and a long-lived Refresh Token. When the Access Token expires, the API returns 401 Unauthorized. An Angular HTTP Interceptor catches this response and sends the Refresh Token to a refresh endpoint. The backend validates the Refresh Token and generates a new Access Token. The frontend then retries the original API request using the new token. If the Refresh Token is also expired, the user must log in again."
+
+
+Q. What happens when an invalid JWT is received?
+>>When an invalid JWT is received, the JWT Filter attempts to validate the token's signature, expiration, and structure. If any validation fails, such as an expired token, invalid signature, or malformed token, Spring Security does not create an Authentication object and does not store anything in SecurityContextHolder. As a result, the user is treated as unauthenticated, and Spring returns a 401 Unauthorized response. If an Authentication object exists but the user lacks the required permissions, Spring returns 403 Forbidden instead.
+
+
+Q. How would you implement JWT authentication in Spring Boot?
+>>To implement JWT authentication in Spring Boot, I first configure Spring Security with Stateless Session Management.<br> I create a UserDetailsService to load users from the database and use BCryptPasswordEncoder for password hashing.<br> During login, the AuthenticationManager authenticates the user using an AuthenticationProvider and UserDetailsService.<br> After successful authentication, a JWT token containing user information is generated and returned to the client.
+
+>For every subsequent request, a custom JWT filter extending OncePerRequestFilter extracts and validates the token from the Authorization header.
+
+>If the token is valid, the filter creates an Authentication object and stores it in SecurityContextHolder. Spring Security then performs authorization checks and allows access to protected resources.
+
+
+Q. How do you logout in JWT-based authentication?
+>>JWT authentication is stateless, so there is no server-side session to invalidate during logout. The simplest logout approach is to remove the Access Token and Refresh Token from the client. 
+
+>In production systems, we usually revoke or delete the Refresh Token stored in the database so that new Access Tokens cannot be generated. For high-security applications, token blacklisting can also be implemented, where logged-out tokens are stored in Redis or a database and rejected during validation. The most common approach is short-lived Access Tokens combined with Refresh Token revocation.
