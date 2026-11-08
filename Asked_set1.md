@@ -6,6 +6,11 @@ Q. How does Spring Security work internally?
 >>"Internally Spring Security works using a filter-based architecture.<br> Every request first passes through the Security Filter Chain managed by FilterChainProxy.<br> During authentication, AuthenticationManager delegates to AuthenticationProvider, which uses UserDetailsService and PasswordEncoder to validate user credentials.<br> After successful authentication, an Authentication object is stored in SecurityContextHolder.<br> Then AuthorizationFilter checks whether the user has the required roles or authorities. If authorized, the request reaches the controller; otherwise Spring returns 401 or 403."
 
 
+Q. What is the Security Filter Chain?
+>>"Security Filter Chain is the core of Spring Security.<br> It is a collection of servlet filters that intercept every HTTP request before it reaches the controller.<br> The chain is managed by FilterChainProxy and contains filters responsible for authentication, authorization, exception handling, session management, and CSRF protection. When a request arrives, each filter executes in order. 
+>For example, a JWT filter validates the token and stores the authenticated user in SecurityContextHolder. Then AuthorizationFilter checks roles and permissions. If all checks pass, the request reaches the controller; otherwise Spring returns 401 or 403."
+
+
 Q. Authentication and Authorization?
 >>Authentication is the process of verifying the user's identity using credentials such as username and password.
 >>When a request comes to a Spring Boot application, it first passes through the Spring Security Filter Chain.<br>
