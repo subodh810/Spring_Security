@@ -2,6 +2,10 @@ Q. Spring Security Architecture?
 >>"Spring Security works through a filter-based architecture. Every request first passes through the Security Filter Chain, where authentication is performed using AuthenticationManager, AuthenticationProvider, and UserDetailsService. After successful authentication, user details are stored in SecurityContext, and authorization checks are applied based on roles and permissions before allowing access to application resources."
 
 
+Q. How does Spring Security work internally?
+>>"Internally Spring Security works using a filter-based architecture.<br> Every request first passes through the Security Filter Chain managed by FilterChainProxy.<br> During authentication, AuthenticationManager delegates to AuthenticationProvider, which uses UserDetailsService and PasswordEncoder to validate user credentials.<br> After successful authentication, an Authentication object is stored in SecurityContextHolder.<br> Then AuthorizationFilter checks whether the user has the required roles or authorities. If authorized, the request reaches the controller; otherwise Spring returns 401 or 403."
+
+
 Q. Authentication and Authorization?
 >>Authentication is the process of verifying the user's identity using credentials such as username and password.
 >>When a request comes to a Spring Boot application, it first passes through the Spring Security Filter Chain.<br>
