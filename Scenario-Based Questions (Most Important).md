@@ -75,7 +75,7 @@ Public and protected endpoint rules,
 Security Filter Chain setup &  
 HTTPS enforcement (production)
 
->"For an Angular frontend calling Spring Boot APIs, I would configure CORS, use JWT-based stateless authentication, disable CSRF for JWT APIs, add a JWT filter in the Security Filter Chain, define authorization rules with requestMatchers(), enforce HTTPS, and implement role-based access control for protected endpoints."
+>"When Angular calls Spring Boot APIs, I configure CORS for cross-origin requests, implement JWT-based stateless authentication, disable CSRF for JWT APIs, add a JWT filter in the Security Filter Chain, define public and protected endpoints using request matchers, enforce role-based authorization, and secure all communication through HTTPS in production."
 
 
 Q. How would you prevent password theft even if the database is compromised?
