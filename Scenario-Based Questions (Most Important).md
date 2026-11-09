@@ -46,3 +46,41 @@ Q. A user has USER and ADMIN roles. How would Spring Security handle authorizati
 >>If a user has both USER and ADMIN roles, Spring Security stores both authorities in the Authentication object inside SecurityContextHolder. During authorization, Spring checks whether the authenticated user possesses the required role. 
 
 >For an endpoint protected with hasRole("ADMIN"), access is granted because the user has the ADMIN role. Similarly, access is granted to endpoints requiring USER role. If the endpoint requires a role that the user does not have, such as MANAGER, Spring returns 403 Forbidden. The authorization decision is based on the authorities present in the Authentication object.
+
+
+Q. How would you implement logout in a stateless JWT application?
+>>In a stateless JWT application, logout is usually implemented on the client side by removing the JWT token from storage (LocalStorage, SessionStorage, or cookies). Since the server does not maintain session state, simply deleting the token prevents future authenticated requests.
+
+>However, if immediate token invalidation is required, the server can maintain a token blacklist or use short-lived access tokens with refresh tokens.
+
+
+Q. How would you secure file upload APIs?
+>>Securing file upload APIs is critical because uploaded files can contain malware, malicious scripts, oversized payloads, or unauthorized content.
+
+>"To secure file upload APIs, I implement authentication and authorization, validate file type and size, scan files for malware, store files outside the web root, generate unique file names, and restrict access to uploaded files."
+
+
+Q. How would you secure sensitive endpoints like /payment and /transfer?
+>>Endpoints like /payment and /transfer are high-risk APIs because they involve financial transactions. Simply securing them with JWT authentication is not enough.
+
+>"For sensitive endpoints such as /payment and /transfer, I would implement multiple security layers including strong authentication, fine-grained authorization, input validation, encryption, rate limiting, transaction verification, auditing, and fraud detection."
+
+
+Q. A frontend Angular application is calling your Spring Boot APIs. What Spring Security configurations are required?
+>>When an Angular frontend calls Spring Boot APIs, the main Spring Security configurations are:<br>
+CORS configuration,
+JWT/OAuth2 authentication,
+CSRF configuration, 
+Public and protected endpoint rules, 
+Security Filter Chain setup &  
+HTTPS enforcement (production)
+
+>"For an Angular frontend calling Spring Boot APIs, I would configure CORS, use JWT-based stateless authentication, disable CSRF for JWT APIs, add a JWT filter in the Security Filter Chain, define authorization rules with requestMatchers(), enforce HTTPS, and implement role-based access control for protected endpoints."
+
+
+Q. How would you prevent password theft even if the database is compromised?
+>>To protect user passwords even if the database is breached, I would never store passwords in plain text. Instead, I would store them using a strong one-way hashing algorithm such as BCrypt or Argon2 with a unique salt for each password. This ensures that even if attackers gain access to the database, they only get hashed values, not the actual passwords."
+
+>>"In Spring Boot, I typically use BCryptPasswordEncoder because it automatically generates a unique salt and is computationally expensive, making brute-force attacks difficult. For additional security, I would enforce strong password policies, enable Multi-Factor Authentication (MFA), implement account lockout or rate limiting after multiple failed login attempts, and monitor against known breached passwords.
+
+>"I would also avoid using fast hashing algorithms like SHA-256 for password storage because they are vulnerable to GPU-based brute-force attacks. Password-specific algorithms such as BCrypt or Argon2 are designed to be slow and resistant to rainbow table attacks."
