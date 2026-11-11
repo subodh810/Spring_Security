@@ -51,8 +51,8 @@ Q. What is the Authentication object?
 
 
 Q. Authentication and Authorization?
->>Authentication is the process of verifying the user's identity using credentials such as username and password.
->>When a request comes to a Spring Boot application, it first passes through the Spring Security Filter Chain.<br>
+>>Authentication is the process of verifying the user's identity using credentials such as username and password.<br>
+>When a request comes to a Spring Boot application, it first passes through the Spring Security Filter Chain.<br>
 ->For authentication, UsernamePasswordAuthenticationFilter extracts credentials and sends them to AuthenticationManager, which delegates to AuthenticationProvider.<br>
 ->The provider uses UserDetailsService to load user details from the database and validates the password.<br>
 ->If successful, the authenticated user is stored in SecurityContextHolder. After authentication, authorization begins.<br>
