@@ -42,7 +42,13 @@ Q. How do you implement Role-Based Access Control (RBAC)?
 >In enterprise applications, roles are often combined with authorities (permissions) to achieve fine-grained access control. This ensures that users are authorized not only based on who they are (Role) but also based on what actions they are allowed to perform (Authority).
 
 Q. How do you restrict access to ADMIN users only?
->>In Spring Security, I can restrict access to ADMIN users at both the URL level and the method level. At the URL level, I use hasRole('ADMIN') in the Security Filter Chain. At the service or controller level, I use method-level security annotations such as @PreAuthorize('hasRole('ADMIN')'). Spring Security then checks whether the authenticated user has the ROLE_ADMIN authority before granting access.
+>>In Spring Security, I can restrict access to ADMIN users at both the URL level and the method level. 
+
+>At the URL level, I use hasRole('ADMIN') in the Security Filter Chain.
+
+>At the service or controller level, I use method-level security annotations such as @PreAuthorize('hasRole('ADMIN')'). 
+
+>Spring Security then checks whether the authenticated user has the ROLE_ADMIN authority before granting access.
 
 Q. How can one user have multiple roles?
 >>In Spring Security, a user can have multiple roles by establishing a many-to-many relationship between Users and Roles. During authentication, all assigned roles are loaded from the database, converted into GrantedAuthority objects, and stored in the SecurityContextHolder. Spring Security then checks these roles during authorization using methods like hasRole() or hasAnyRole().
