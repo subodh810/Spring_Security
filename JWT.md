@@ -1,5 +1,5 @@
 Q. JWT and Flow?
->>JWT (JSON Web Token) is a compact, secure way to transmit user information between a client and a server. It is commonly used for authentication and authorization in modern applications.
+>>JWT (JSON Web Token) is a compact, secure way to exchange/transmit user information between a client and a server. It is commonly used for authentication and authorization in modern applications.
 
 >>Structure of JWT :- A JWT consists of 3 parts separated by dots
 >1. Header<br>
