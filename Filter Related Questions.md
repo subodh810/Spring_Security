@@ -11,8 +11,22 @@ Q. What is Spring Security Filter Chain?
 >For example, a JWT filter validates the token and stores the authenticated user in SecurityContextHolder. Then AuthorizationFilter checks roles and permissions. If all checks pass, the request reaches the controller; otherwise Spring returns 401 or 403."
 
 
-Q. Difference between Filter and Interceptor?
->>
+Q. What is filter and Interceptor?
+
+#Filter
+>> A filter is the part of Servlet Specification and execute before the request reaches the #DispacterServlet. It works at the container level like Tomcat & Jetty. It is commonly used for logging, authentication, authorization, request/response modification, CORS Handling and encoding.
+
+#Interceptor
+>> An interceptor is a spring MVC feature that execute after the request reaches the DispaterServlet but before the controller method is called. It is generally used for the request pre-processing, authorization checks, aduit logging.
+
+>>Filter Sequence
+A filter is the first component that receives an HTTP request before it reaches DispatacherServlet. We typically use filter for authentication, authorization, request/response modification, cros handling.
+
+>>In my project, a JWT authentication filter validates the token from the request header. If the token is invalid, the filter immediately returns a 401 response and request never reaches the Controller.
+
+>>client -> filter -> DispacherServlet -> Interceptor -> Controller -> Service -> Respository -> DB 
+
+>After processing the request,response follows the reverse to the client.
 
 Q. How do you add a custom filter?
 >>A custom filter in Spring Boot is created by implementing the Servlet Filter interface or extending OncePerRequestFilter.
