@@ -27,7 +27,11 @@ Q: Can JWT be modified by the client?
 
 
 Q. Why use OncePerRequestFilter in JWT Authentication?
->>We use OncePerRequestFilter in JWT authentication to ensure that JWT validation and authentication logic are executed only once for each HTTP request. This prevents duplicate token processing during forwards, error dispatches, or other internal servlet operations, improving both correctness and performance. Since JWT authentication is stateless and must happen for every request, OncePerRequestFilter is the most commonly used base class for implementing a custom JWT filter in Spring Security.
+>>We use OncePerRequestFilter in JWT authentication to ensure that JWT validation and authentication logic are executed only once for each HTTP request.
+
+>>This prevents duplicate token processing during forwards, error dispatches, or other internal servlet operations, improving both correctness and performance.
+
+>>Since JWT authentication is stateless and must happen for every request, OncePerRequestFilter is the most commonly used base class for implementing a custom JWT filter in Spring Security.
 
 
 Q. What is the difference between JWT and Session Authentication?
