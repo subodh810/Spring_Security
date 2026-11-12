@@ -15,11 +15,15 @@ Q. Difference between Filter and Interceptor?
 >>
 
 Q. How do you add a custom filter?
->>In Spring Security, I add a custom filter when I need to implement custom request processing logic such as JWT authentication, API key validation, request logging, audit tracking, multitenancy, or custom authorization.
+>>A custom filter in Spring Boot is created by implementing the Servlet Filter interface or extending OncePerRequestFilter.
 
->The recommended approach is to create a filter by extending OncePerRequestFilter, implement the custom logic inside doFilterInternal(), and then register the filter in the Spring Security Filter Chain using addFilterBefore(), addFilterAfter(), or addFilterAt(). 
+>>Filters intercept requests before they reach the Spring MVC controller and responses before they are returned to the client. 
 
->For JWT-based applications, the filter is typically added before UsernamePasswordAuthenticationFilter so that token validation happens before authorization
+>>Common use cases include JWT authentication, logging, auditing, request/response modification, CORS handling, and rate limiting. 
+
+>>Filters can be registered using @Component, FilterRegistrationBean, or added to the Spring Security filter chain using addFilterBefore() and addFilterAfter().
+
+>>The chain.doFilter() method must be called to pass the request to the next filter or controller. In Spring Security applications, OncePerRequestFilter is generally preferred for custom authentication filters.
 
 Q. What is the execution order of filters?
 >>A custom filter in Spring Boot is created by implementing the Servlet Filter interface or extending OncePerRequestFilter.
