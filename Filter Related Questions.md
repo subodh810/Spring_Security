@@ -6,7 +6,10 @@ Q. What is a Servlet Filter?
 >In Spring Security, the entire security framework is implemented using a chain of servlet filters, and custom JWT authentication is commonly implemented using a filter that extends OncePerRequestFilter.
 
 Q. What is Spring Security Filter Chain?
->>The Spring Security Filter Chain is a sequence of security filters that intercept every incoming HTTP request before it reaches the controller. Each filter performs a specific security-related task such as authentication, authorization, session management, exception handling, CSRF protection, or JWT validation. The request passes through these filters one by one, and only if all security checks are successful does it reach the controller.
+>>"Security Filter Chain is the core of Spring Security.<br> It is a collection of servlet filters that intercept every HTTP request before it reaches the controller.<br> The chain is managed by FilterChainProxy and contains filters responsible for authentication, authorization, exception handling, session management, and CSRF protection. When a request arrives, each filter executes in order. 
+
+>For example, a JWT filter validates the token and stores the authenticated user in SecurityContextHolder. Then AuthorizationFilter checks roles and permissions. If all checks pass, the request reaches the controller; otherwise Spring returns 401 or 403."
+
 
 Q. Difference between Filter and Interceptor?
 >>
