@@ -25,7 +25,7 @@ Q. How do you configure CORS in Spring Security?
 Q. Difference between CSRF and CORS?
 >>CSRF and CORS address different security concerns. 
 
-CSRF, or Cross-Site Request Forgery, is an attack where a malicious website tricks an authenticated user into sending unwanted requests to another application where they are already logged in.
+>CSRF, or Cross-Site Request Forgery, is an attack where a malicious website tricks an authenticated user into sending unwanted requests to another application where they are already logged in.
 
 >The attack succeeds because browsers automatically send session cookies with requests. Spring Security protects against this by generating and validating CSRF tokens.
 
