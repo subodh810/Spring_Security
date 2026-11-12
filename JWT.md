@@ -35,7 +35,7 @@ Q. Why use OncePerRequestFilter in JWT Authentication?
 
 
 Q. What is the difference between JWT and Session Authentication?
->>Session Authentication is stateful, where the server creates and stores a session after login and the client sends a session ID with every request. JWT Authentication is stateless,<br> where the server generates a signed token containing user information and the client sends that token on every request.
+>>Session Authentication is stateful, where the server creates and stores a session after login and the client sends a session ID with every request.<br> JWT Authentication is stateless, where the server generates a signed token containing user information and the client sends that token on every request.
 
 >Session-based authentication requires server-side storage, while JWT does not, making JWT more suitable for REST APIs, microservices, and Angular/React applications.
 
