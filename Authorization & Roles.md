@@ -4,7 +4,7 @@ Q. Difference between Role and Authority?
 >In Spring Security, roles are typically collections of authorities. We check roles using hasRole() and authorities using hasAuthority(). Roles help manage groups of permissions, while authorities provide fine-grained access control. In enterprise applications, we usually use both together.
 
 Q. What is hasRole()?
->>hasRole() is a Spring Security expression used to check whether the authenticated user has a specific role. 
+>>Use hasRole() when you want to check a user's role, such as ADMIN, USER, or MANAGER.
 
 >It is commonly used with @PreAuthorize for method-level security. 
 
@@ -15,10 +15,11 @@ Q. What is hasRole()?
 Q. What is hasAuthority()?
 >>hasAuthority() is a Spring Security expression used to authorize access based on a specific permission or privilege. 
 
->Unlike hasRole(), which checks high-level roles such as ADMIN or USER, hasAuthority() checks fine-grained permissions such as DELETE_USER, APPROVE_LOAN, or TRANSFER_MONEY.
+>Use hasAuthority() when you want to check a specific permission, such as READ_USER, WRITE_USER, or DELETE_USER.
 
 >It is commonly used with @PreAuthorize to implement permission-based access control at the method level.
 
+>The main difference is that hasRole() automatically adds the ROLE_ prefix, whereas hasAuthority() checks the exact authority name.
 
 Q. What are Granted Authorities?
 >>Granted Authorities are the permissions or privileges assigned to an authenticated user in Spring Security. 
