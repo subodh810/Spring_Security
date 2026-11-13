@@ -39,5 +39,7 @@ Q. How do you add a custom filter?
 
 >>The chain.doFilter() method must be called to pass the request to the next filter or controller. In Spring Security applications, OncePerRequestFilter is generally preferred for custom authentication filters.
 
+>>>The recommended approach is to create a filter by extending OncePerRequestFilter, implement the custom logic inside doFilterInternal(), and then register the filter in the Spring Security Filter Chain using addFilterBefore(), addFilterAfter(), or addFilterAt()
+
 Q. What is the execution order of filters?
 >>Spring Security processes every incoming HTTP request through a Security Filter Chain, which is an ordered collection of servlet filters. Each filter has a specific responsibility such as authentication, authorization, exception handling, session management, CSRF protection, or JWT validation. The request flows through these filters sequentially before reaching the controller. If any filter fails validation, the request is stopped and an appropriate response such as 401 Unauthorized or 403 Forbidden is returned.
