@@ -8,10 +8,11 @@ It works by authenticating the user through an Authorization Server, such as Goo
 Q. Difference between OAuth2 and JWT?
 >>OAuth2 and JWT solve different problems. 
 
->OAuth2 is an authorization framework that defines how a client obtains access to protected resources. 
+>OAuth2 is an authorization framework that that allows third-party applications to access a user's resources without sharing their password.<br>
 
->JWT is a token format used to securely store user information and claims. 
+>>JWT (JSON Web Token) is a compact, secure way to exchange/transmit user information between a client and a server. It is commonly used for authentication and authorization in modern applications.
 
+>>Structure of JWT :- A JWT consists of 3 parts separated by dots
 >In simple terms, OAuth2 defines the process of obtaining access, while JWT is often the token that carries that access information.
 
 >A common example is "Login with Google," where OAuth2 manages the authorization flow and Google issues a JWT token to the application.
