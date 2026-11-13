@@ -1,5 +1,11 @@
 Q. What is @PreAuthorize?
->>@PreAuthorize is a Spring Security annotation used for method-level authorization. It evaluates a security expression before a method executes. We can use it to restrict access based on roles, authorities, or custom conditions such as hasRole('ADMIN') or hasAuthority('READ_PRIVILEGE'). If the user does not satisfy the condition, Spring Security returns a 403 Forbidden response. To use it, method security must be enabled using @EnableMethodSecurity.
+>>@PreAuthorize is a Spring Security annotation used for method-level authorization.
+
+>>@PreAuthorize performs authorization before a method executes and is commonly used for role- and permission-based access control.
+
+>>We can use it to restrict access based on roles, authorities, or custom conditions such as hasRole('ADMIN') or hasAuthority('READ_PRIVILEGE'). 
+
+>>If the user does not satisfy the condition, Spring Security returns a 403 Forbidden response. To use it, method security must be enabled using @EnableMethodSecurity.
 
 Q. Difference between @PreAuthorize and @PostAuthorize?
 >>@PreAuthorize and @PostAuthorize are method-level security annotations in Spring Security.
