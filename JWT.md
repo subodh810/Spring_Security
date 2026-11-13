@@ -51,7 +51,9 @@ Q. What is the difference between Access Token and Refresh Token?
 
 
 Q. How do you validate a JWT token?
->>"JWT validation involves multiple checks. First, Spring Security extracts the token from the Authorization header. Then it verifies the token's signature using the secret key to ensure it hasn't been tampered with. Next, it checks whether the token has expired. After that, it extracts the username from the token and loads the user details from the database. If all checks pass, Spring creates an Authentication object and stores it in SecurityContextHolder. The user is then considered authenticated and allowed to access protected resources."
+>>"JWT validation involves multiple checks. First, Spring Security extracts the token from the Authorization header. Then it verifies the token's signature using the secret key to ensure it hasn't been tampered with. 
+
+>>Next, it checks whether the token has expired. After that, it extracts the username from the token and loads the user details from the database. If all checks pass, Spring creates an Authentication object and stores it in SecurityContextHolder. The user is then considered authenticated and allowed to access protected resources."
 
 
 Q. How do you handle token expiration?
