@@ -65,7 +65,9 @@ Q. How do you handle token expiration?
 
 
 Q. What happens when an invalid JWT is received?
->>When an invalid JWT is received, the JWT Filter attempts to validate the token's signature, expiration, and structure. If any validation fails, such as an expired token, invalid signature, or malformed token, Spring Security does not create an Authentication object and does not store anything in SecurityContextHolder. As a result, the user is treated as unauthenticated, and Spring returns a 401 Unauthorized response. If an Authentication object exists but the user lacks the required permissions, Spring returns 403 Forbidden instead.
+>>When an invalid JWT is received, the JWT Filter attempts to validate the token's signature, expiration, and structure. If any validation fails, such as an expired token, invalid signature, or malformed token, Spring Security does not create an Authentication object and does not store anything in SecurityContextHolder.
+
+>>As a result, the user is treated as unauthenticated, and Spring returns a 401 Unauthorized response. If an Authentication object exists but the user lacks the required permissions, Spring returns 403 Forbidden instead.
 
 
 Q. How would you implement JWT authentication in Spring Boot?
