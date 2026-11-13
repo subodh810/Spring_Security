@@ -71,7 +71,9 @@ Q. What happens when an invalid JWT is received?
 
 
 Q. How would you implement JWT authentication in Spring Boot?
->>To implement JWT authentication in Spring Boot, I first configure Spring Security with Stateless Session Management.<br> I create a UserDetailsService to load users from the database and use BCryptPasswordEncoder for password hashing.<br> During login, the AuthenticationManager authenticates the user using an AuthenticationProvider and UserDetailsService.<br> After successful authentication, a JWT token containing user information is generated and returned to the client.
+>>To implement JWT authentication in Spring Boot, I first configure Spring Security with Stateless Session Management.
+
+>>I create a UserDetailsService to load users from the database and use BCryptPasswordEncoder for password hashing.<br> During login, the AuthenticationManager authenticates the user using an AuthenticationProvider and UserDetailsService.<br> After successful authentication, a JWT token containing user information is generated and returned to the client.
 
 >For every subsequent request, a custom JWT filter extending OncePerRequestFilter extracts and validates the token from the Authorization header.
 
