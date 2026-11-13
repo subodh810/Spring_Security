@@ -33,6 +33,8 @@ Q. Why use OncePerRequestFilter in JWT Authentication?
 
 >>Since JWT authentication is stateless and must happen for every request, OncePerRequestFilter is the most commonly used base class for implementing a custom JWT filter in Spring Security.
 
+>>The recommended approach for add the custom filter, to create a filter by extending OncePerRequestFilter, implement the custom logic inside doFilterInternal(), and then register the filter in the Spring Security Filter Chain using addFilterBefore(), addFilterAfter(), or addFilterAt()
+
 
 Q. What is the difference between JWT and Session Authentication?
 >>Session Authentication is stateful, where the server creates and stores a session after login and the client sends a session ID with every request.<br> JWT Authentication is stateless, where the server generates a signed token containing user information and the client sends that token on every request.
