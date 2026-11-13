@@ -79,6 +79,30 @@ Q. How would you implement JWT authentication in Spring Boot?
 
 >If the token is valid, the filter creates an Authentication object and stores it in SecurityContextHolder. Spring Security then performs authorization checks and allows access to protected resources.
 
+>>or
+
+>>"I have implemented JWT-based authentication using Spring Security.
+
+>>First, I configure Spring Security with stateless session management because we don't want to maintain HTTP sessions on the server.
+
+>>Then I implement UserDetailsService to load user details from the database.
+
+>>For password security, I use BCryptPasswordEncoder. During login, Spring Security validates the raw password against the encoded password stored in the database.
+
+>>I use AuthenticationManager, which delegates authentication to the appropriate AuthenticationProvider, generally DaoAuthenticationProvider.
+
+>>Once authentication is successful, I generate a JWT token containing user information, roles, issued-at time and expiration time. Then I sign the token using a secure signing key and return it to the client.
+
+>>For subsequent requests, the client sends the JWT token in the Authorization header as a Bearer token.
+
+>>I implement a custom filter by extending OncePerRequestFilter and override the doFilterInternal() method.
+
+>>Inside this method, I extract the JWT token, validate its signature and expiration, and retrieve the username.
+
+>>Then I load the user details and create an authenticated UsernamePasswordAuthenticationToken. I set it inside the SecurityContextHolder.
+
+>>Finally, I configure this custom JWT filter in the Spring Security filter chain using addFilterBefore(), generally before UsernamePasswordAuthenticationFilter.
+
 
 Q. How do you logout in JWT-based authentication?
 >>JWT authentication is stateless, so there is no server-side session to invalidate during logout. The simplest logout approach is to remove the Access Token and Refresh Token from the client. 
