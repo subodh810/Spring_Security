@@ -105,6 +105,10 @@ Q. How would you implement JWT authentication in Spring Boot?
 
 
 Q. How do you logout in JWT-based authentication?
->>JWT authentication is stateless, so there is no server-side session to invalidate during logout. The simplest logout approach is to remove the Access Token and Refresh Token from the client. 
+>>JWT authentication is stateless, so there is no server-side session to invalidate during logout. 
 
->In production systems, we usually revoke or delete the Refresh Token stored in the database so that new Access Tokens cannot be generated. For high-security applications, token blacklisting can also be implemented, where logged-out tokens are stored in Redis or a database and rejected during validation. The most common approach is short-lived Access Tokens combined with Refresh Token revocation.
+>>The simplest logout approach is to remove the Access Token and Refresh Token from the client. 
+
+>>In production systems, we usually revoke or delete the Refresh Token stored in the database so that new Access Tokens cannot be generated. 
+
+>>For high-security applications, token blacklisting can also be implemented, where logged-out tokens are stored in Redis or a database and rejected during validation. The most common approach is short-lived Access Tokens combined with Refresh Token revocation.
